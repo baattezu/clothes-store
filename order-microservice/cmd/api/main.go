@@ -10,8 +10,10 @@ import (
 
 	// undescore (alias) is used to avoid go compiler complaining or erasing this
 	// library.
-	_ "github.com/lib/pq"
+	"order-microservice/internal/data"
 	"order-microservice/internal/jsonlog"
+
+	_ "github.com/lib/pq"
 )
 
 const version = "1.0.0"
@@ -53,7 +55,8 @@ type application struct {
 	//models data.Models     // hold new models in app
 	//mailer mailer.Mailer   // use ower mailer from mailer.go
 	// used to wait for a collection of goroutines to finish their work
-	wg sync.WaitGroup
+	clothes data.Models
+	wg      sync.WaitGroup
 }
 
 func main() {
