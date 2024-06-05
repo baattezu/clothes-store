@@ -27,12 +27,7 @@ func (app *application) routes() http.Handler {
 	router.HandlerFunc(http.MethodPost, "/cart", wrapHandler(auth.AuthMiddleware(http.HandlerFunc(cartHandler.HandleCart))))
 	router.HandlerFunc(http.MethodPost, "/order", wrapHandler(auth.AuthMiddleware(http.HandlerFunc(orderHandler.HandleOrder))))
 	router.HandlerFunc(http.MethodGet, "/v1/healthcheck", app.healthcheckHandler)
-	router.HandlerFunc(http.MethodGet, "/healthCheck", app.healthcheckHandler)
-	router.HandlerFunc(http.MethodPost, "/createClothe", app.createClotheHandler)
-	router.HandlerFunc(http.MethodGet, "/getClothe/:id", app.getClotheHandler)
-	router.HandlerFunc(http.MethodGet, "/getClothe", app.listClotheHandler)
-	router.HandlerFunc(http.MethodPut, "/updateClothe/:id", app.editClotheHandler)
-	router.HandlerFunc(http.MethodDelete, "/deleteClothe/:id", app.deleteClotheHandler)
+
 	// Return the httprouter instance.
 	// wrapping the router with rateLimiter() middleware to limit requests' frequency
 	return app.recoverPanic(app.rateLimit(router))

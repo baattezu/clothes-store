@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"net/url"
 	"strconv"
 
 	"github.com/julienschmidt/httprouter"
@@ -100,16 +99,4 @@ func (app *application) background(fn func()) {
 		// Execute the arbitrary function that we passed as the parameter.
 		fn()
 	}()
-}
-
-func (app *application) readString(qs url.Values, key string, defaultValue string) string {
-	// Extract the value for a given key from the query string. If no key exists this
-	// will return the empty string "".
-	s := qs.Get(key)
-	// If no key exists (or the value is empty) then return the default value.
-	if s == "" {
-		return defaultValue
-	}
-	// Otherwise return the string.
-	return s
 }
